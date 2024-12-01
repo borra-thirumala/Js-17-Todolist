@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+        display: flex;
+        gap: 10px;
+        justify-content:space-between;
+        align-items:center;
+        background-color: red;
+        padding: 10px;
+    }
+
+    button{
+        padding:5px;
+        background-color: pink;
+        cursor:pointer;
+    }
+    ul{
+        list-style-type: none;
+        margin:0px;
+        padding:10px;
+    }
+    li {
+        background-color: aqua;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+        }
+    .m{
+        width:900px;
+        margin:20px auto;
+    }
+
+    
+    
+
+    </style>
+</head>
+<body>
+    <marquee width="90%" direction="left" height="100px" style="color: red;margin-top: 15px;font-size: 35px;">
+        <i>MY-TO-DO-LIST</i>
+        </marquee>
+    <center>
+    <div class="m">
+    <form id="form">
+        <input id="ip" type="text" required>
+        <input type="submit" value="add">
+        
+    </form>
+    <ul id="list"></ul>
+</div></center>
+    
+
+<script>
+    let form = document.getElementById("form")
+    let ip = document.getElementById("ip")
+    let list = document.getElementById("list")
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let listitem = document.createElement("li");
+        listitem.innerText = ip.value + " ";
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "DELETE";
+        
+        deleteBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to delete this item?")) {
+            list.removeChild(listitem);
+            }
+        });
+
+        let editBtn = document.createElement("button");
+        editBtn.innerHTML = "EDIT";
+        editBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to editt this item?")) 
+            ip.value = listitem.firstChild.textContent.trim(); 
+            list.removeChild(listitem); 
+            
+        });
+
+        listitem.appendChild(editBtn);
+        listitem.appendChild(deleteBtn);
+        list.appendChild(listitem);
+
+        ip.value = ""; 
+    });
+
+</script>
+</body>
+</html>
